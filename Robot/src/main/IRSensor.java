@@ -29,9 +29,9 @@ public class IRSensor extends Thread {
 			
 			}
 		}
-		public int getRemotecmd() {
+		public int getRemotecmd(int channel) {
 			
-			return infraredSensor.getRemoteCommand(3);
+			return infraredSensor.getRemoteCommand(channel);
 			}
 }
 		

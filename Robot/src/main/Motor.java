@@ -23,12 +23,16 @@ public class Motor {
 		mB.stop();
 	}
 	public void DriveForward() {
+		mB.setSpeed(900);
+		mA.setSpeed(900);
 		mA.startSynchronization();
 		mA.rotate(360);
 		mB.rotate(360);
 		mA.endSynchronization();
 	}
 	public void DriveBackward() {
+		mB.setSpeed(900);
+		mA.setSpeed(900);
 		mA.startSynchronization();
 		mA.rotate(-360);
 		mB.rotate(-360);
@@ -41,6 +45,7 @@ public class Motor {
 		mB.rotate(360);
 		mA.endSynchronization();
 		
+		
 	}
 	public void DriveRight() {
 		mA.setSpeed(450);
@@ -48,7 +53,22 @@ public class Motor {
 		mA.rotate(360);
 		mB.rotate(360);
 		mA.endSynchronization();
+		mA.setSpeed(900);
 		
+	}
+	public void KeepDriving(int keep) {
+		if (keep == 1) {
+			DriveForward();
+		}
+		else if (keep == 2) {
+			DriveBackward();
+		}
+		else if (keep == 3) {
+			DriveLeft();
+		}
+		else if (keep == 4) {
+			DriveRight();
+		}
 	}
 	
 
