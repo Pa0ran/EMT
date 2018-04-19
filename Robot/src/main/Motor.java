@@ -26,32 +26,32 @@ public class Motor {
 		mB.setSpeed(900);
 		mA.setSpeed(900);
 		mA.startSynchronization();
-		mA.rotate(360);
-		mB.rotate(360);
+		mA.rotate(-360);
+		mB.rotate(-360);
 		mA.endSynchronization();
 	}
 	public void DriveBackward() {
 		mB.setSpeed(900);
 		mA.setSpeed(900);
 		mA.startSynchronization();
-		mA.rotate(-360);
-		mB.rotate(-360);
+		mA.rotate(360);
+		mB.rotate(360);
 		mA.endSynchronization();
 	}
 	public void DriveLeft() {
-		mB.setSpeed(450);
+		mB.setSpeed(300);
 		mA.startSynchronization();
-		mA.rotate(360);
-		mB.rotate(360);
+		mA.rotate(-360);
+		mB.rotate(-360);
 		mA.endSynchronization();
 		
 		
 	}
 	public void DriveRight() {
-		mA.setSpeed(450);
+		mA.setSpeed(300);
 		mA.startSynchronization();
-		mA.rotate(360);
-		mB.rotate(360);
+		mA.rotate(-360);
+		mB.rotate(-360);
 		mA.endSynchronization();
 		mA.setSpeed(900);
 		

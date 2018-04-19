@@ -1,5 +1,6 @@
 package main;
 
+import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
@@ -18,7 +19,7 @@ public class Main {
 		RegulatedMotor m2 = new EV3LargeRegulatedMotor(MotorPort.B);
 		Motor moottori = new Motor(m1,m2); 
 		irs.start();
-		while(true) {
+		while(!Button.ENTER.isDown()) {
 			remoteNum = irs.getRemotecmd(3);
 			LCD.drawString("Hello", 0, 0);
 			LCD.drawInt(remoteNum,0,1);
