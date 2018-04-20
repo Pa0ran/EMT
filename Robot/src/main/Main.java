@@ -10,52 +10,33 @@ import lejos.hardware.sensor.EV3IRSensor;
 import lejos.robotics.RegulatedMotor;
 
 public class Main {
+	static ControlSource controls;
 	
 	public static void main(String[] args) {
-		int remoteNum;
-		int keep = 0;
+
 		boolean record =false;
+		
+		
 		EV3IRSensor irSensor = new EV3IRSensor(SensorPort.S1);
-		IRSensor irs = new IRSensor(irSensor);;
+		IRSensor irs = new IRSensor(irSensor);
+		controls = new ManualControl(irs);
 		RegulatedMotor m1 = new EV3LargeRegulatedMotor(MotorPort.A);
 		RegulatedMotor m2 = new EV3LargeRegulatedMotor(MotorPort.B);
 		RegulatedMotor m3 = new EV3MediumRegulatedMotor(MotorPort.C);
 		Motor moottori = new Motor(m1,m2,m3);
 		RouteManager route = new RouteManager();
-		irs.start();
+		//irs.start();
 		while(!Button.ENTER.isDown()) {
-			remoteNum = irs.getRemotecmd(3);
-			LCD.drawString("Hello", 0, 0);
-			LCD.drawInt(remoteNum,0,1);
-			switch(remoteNum) {
-			case 1 : 
-				moottori.DriveForward();
-				keep = 1;
-				break;
-			case 2:
-				moottori.DriveBackward();
-				keep = 2;
-				break;
-			case 3:
-				moottori.DriveRight();
-				break;
-			case 4:
-				moottori.DriveLeft();
-				break;
-			case 9:
-				moottori.Stop();
-				keep = 0;
-				break;
-			default:
-				moottori.KeepDriving(keep);
-				break;
+			moottori.drive(controls.getMotorSpeed());
+			moottori.steer(controls.getSteeringAngle());
 			}
 			
 			
 			
 		}
-	}
+	
+}
 	
 	
 
-}
+
