@@ -46,6 +46,18 @@ public class Motor {
 	
 		
 	}
+	
+	public void drive(int rotation) {
+		mA.startSynchronization();
+		mA.rotate(rotation);
+		mB.rotate(rotation);
+		mA.endSynchronization();
+	}
+	
+	public void steer(int angle) {
+		mC.rotate(angle);
+	}
+	
 	public void KeepDriving(int keep) {
 		if (keep == 1) {
 			DriveForward();
