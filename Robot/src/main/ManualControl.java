@@ -102,6 +102,20 @@ public class ManualControl implements ControlSource {
 				break;
 			}
 		}
+		else if(channel == 2) {
+			switch(remoteNum) {
+			case 1:
+				record = true;
+			case 2:
+				record = false;
+			case 3:
+				route.Play();
+				route.Play = true;
+	
+				
+				
+			}
+		}
 	}
 
 }

@@ -31,7 +31,7 @@ public class RouteManager {
 		while(Play == true) {
 			for(int i = 0;i<time.length;i++) {
 				if(whatDo[i] == 1) {
-					moottori.DriveForward();
+					
 				}
 				else if (whatDo[i] == 2) {
 					moottori.DriveBackward();
