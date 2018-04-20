@@ -14,8 +14,6 @@ public class Main {
 	
 	public static void main(String[] args) {
 
-		boolean record =false;
-		
 		
 		EV3IRSensor irSensor = new EV3IRSensor(SensorPort.S1);
 		IRSensor irs = new IRSensor(irSensor);
@@ -24,7 +22,6 @@ public class Main {
 		RegulatedMotor m2 = new EV3LargeRegulatedMotor(MotorPort.B);
 		RegulatedMotor m3 = new EV3MediumRegulatedMotor(MotorPort.C);
 		Motor moottori = new Motor(m1,m2,m3);
-		RouteManager route = new RouteManager();
 		//irs.start();
 		while(!Button.ENTER.isDown()) {
 			moottori.drive(controls.getMotorSpeed());
