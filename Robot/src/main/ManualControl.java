@@ -4,17 +4,22 @@ import lejos.hardware.lcd.LCD;
 
 public class ManualControl implements ControlSource {
 	
-	public boolean record =false;
+	public boolean record = false;
 	public int channel = 3;
-	RouteManager route = new RouteManager();
 	int steeringAngle = 0;
 	int direction = 0;
 	int what = 0;
+	
+	RouteManager route = new RouteManager();
 	IRSensor ir;
-	public ManualControl(IRSensor ir) {
+	
+	/**get irsensor and start its thread*/
+	public ManualControl(IRSensor ir) {	
 		this.ir = ir;
 		ir.start();
 	}
+	
+	/**gets stearingAngle, returns it and then sets it to 0*/
 	@Override
 	public int getSteeringAngle() {
 		updateIR();
@@ -23,20 +28,23 @@ public class ManualControl implements ControlSource {
 		return temp;
 	}
 
+	/**returns motors direction*360 and calls 'updateIR()'*/
 	@Override
 	public int getMotorSpeed() {
 		updateIR();
-		// TODO Auto-generated method stub
 		return direction*360;
 	}
 	
+	/**En lähteny koskee, koska hiton sotku*/
 	public void updateIR() {
 		float timeNow = 0;
 		float timeEnd;
 		float timeTotal;
 		int remoteNum = ir.getRemotecmd(channel);
+		
 		LCD.drawString("Hello", 0, 0);
 		LCD.drawInt(remoteNum,0,1);
+		
 		if(channel == 3) {
 			switch(remoteNum) {
 			case 1: 
