@@ -126,4 +126,9 @@ public class ManualControl implements ControlSource {
 		}
 	}
 
+	@Override
+	public String getName() {
+		return "Manual Control";
+	}
+
 }
