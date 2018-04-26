@@ -33,7 +33,7 @@ public class JaateloValinta {
         		
         }
     	
-    		LCD.drawString("Kassan saldo:"+kassaSaldo,0,0);
+    		//LCD.drawString("Kassan saldo:"+kassaSaldo,0,0);
     	
     	
     }
