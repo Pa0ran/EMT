@@ -7,13 +7,10 @@ import lejos.robotics.RegulatedMotor;
 
 public class RouteManager {
 	
-	private int[] whatDo;
-	private float[] time;
+	int[] whatDo;
+	float[] time;
 	public boolean Play = false;
-	RegulatedMotor m1 = new EV3LargeRegulatedMotor(MotorPort.A);
-	RegulatedMotor m2 = new EV3LargeRegulatedMotor(MotorPort.B);
-	RegulatedMotor m3 = new EV3MediumRegulatedMotor(MotorPort.C);
-	Motor moottori = new Motor(m1,m2,m3);
+	//Main head = new Main();
 	public RouteManager() {
 		
 	}
@@ -24,28 +21,36 @@ public class RouteManager {
 		time[count] = howLong;
 		count++;
 	}
-	public void Play() {
+	/*public void Play() {
 		Play = true;
 		float timeStart = System.nanoTime();
 		float timeStop;
 		while(Play == true) {
 			for(int i = 0;i<time.length;i++) {
+				timeStart = System.nanoTime();
+				timeStop = timeStart + time[i];
 				if(whatDo[i] == 1) {
-					
+					while(time[i]< System.nanoTime()) {
+						head.moottori.drive(900);
+				
+					}
 				}
 				else if (whatDo[i] == 2) {
-					moottori.DriveBackward();
+					while(time[i]< System.nanoTime()) {
+						head.moottori.drive(-900);
+				
+					}
 				}
 				else if (whatDo[i] == 3) {
-					moottori.DriveLeft();
+					head.moottori.steer(30);
 							}
 				else if (whatDo[i] == 4) {
-					moottori.DriveRight();
+					head.moottori.steer(-30);
 				}
 				else if (whatDo[i] == 9) {
-					moottori.Stop();
+					head.moottori.Stop();
 				}
 			}
 		}
-	}
+	}*/
 }

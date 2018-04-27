@@ -1,5 +1,6 @@
 package main;
 
+import lejos.hardware.Sound;
 import lejos.hardware.lcd.LCD;
 
 public class ManualControl implements ControlSource {
@@ -35,95 +36,101 @@ public class ManualControl implements ControlSource {
 		return direction*360;
 	}
 	
-	/**En lähteny koskee, koska hiton sotku*/
 	public void updateIR() {
 		float timeNow = 0;
 		float timeEnd;
 		float timeTotal;
-		int remoteNum = ir.getRemotecmd(channel);
-		
+		int remoteNum = ir.getRemotecmd(3);
+		int remoteChan2 = ir.getRemotecmd(2);
 		LCD.drawString("Hello", 0, 0);
 		LCD.drawInt(remoteNum,0,1);
+		LCD.drawInt(channel,0,4);
 		
-		if(channel == 3) {
-			switch(remoteNum) {
-			case 1: 
-				direction = 1;
-				if(record == true) {
-					if(what != 1) {
-						timeEnd = System.nanoTime();
-						timeTotal = timeEnd-timeNow;
-						route.Record(what,timeTotal);
-					}
-					timeNow = System.nanoTime();
-					what = 1;
+		
+		switch(remoteNum) {
+		case 1: 
+			direction = 1;
+			if(record == true) {
+				if(what != 1) {
+					timeEnd = System.nanoTime();
+					timeTotal = timeEnd-timeNow;
+					route.Record(what,timeTotal);
 				}
-				break;
-			case 2:
-				direction = -1;
-				if(record == true) {
-					if(what != 2) {
-						timeEnd = System.nanoTime();
-						timeTotal = timeEnd-timeNow;
-						route.Record(what,timeTotal);
-					}
-					timeNow = System.nanoTime();
-					what = 2;
-				}
-				break;
-			case 3:
-				steeringAngle = 30;
-				if(record == true) {
-					if(what != 3) {
-						timeEnd = System.nanoTime();
-						timeTotal = timeEnd-timeNow;
-						route.Record(what,timeTotal);
-					}
-					timeNow = System.nanoTime();
-					what = 3;
-				}
-				break;
-			case 4:
-				steeringAngle = -30;
-				if(record == true) {
-					if(what != 4) {
-						timeEnd = System.nanoTime();
-						timeTotal = timeEnd-timeNow;
-						route.Record(what,timeTotal);
-						
-					}
-					timeNow = System.nanoTime();
-					what = 4;
-				}
-				break;
-			case 9:
-				direction = 0;
-				if(record == true) {
-					if(what != 9) {
-						timeEnd = System.nanoTime();
-						timeTotal = timeEnd-timeNow;
-						route.Record(what,timeTotal);
-					}
-					timeNow = System.nanoTime();
-					what = 9;
-				}
-				break;
+				timeNow = System.nanoTime();
+				what = 1;
 			}
+			break;
+		case 2:
+			direction = -1;
+			if(record == true) {
+				if(what != 2) {
+					timeEnd = System.nanoTime();
+					timeTotal = timeEnd-timeNow;
+					route.Record(what,timeTotal);
+				}
+				timeNow = System.nanoTime();
+				what = 2;
+			}
+			break;
+		case 3:
+			steeringAngle = 30;
+			if(record == true) {
+				if(what != 3) {
+					timeEnd = System.nanoTime();
+					timeTotal = timeEnd-timeNow;
+					route.Record(what,timeTotal);
+				}
+				timeNow = System.nanoTime();
+				what = 3;
+			}
+			break;
+		case 4:
+			steeringAngle = -30;
+			if(record == true) {
+				if(what != 4) {
+					timeEnd = System.nanoTime();
+					timeTotal = timeEnd-timeNow;
+					route.Record(what,timeTotal);
+					
+				}
+				timeNow = System.nanoTime();
+				what = 4;
+			}
+			break;
+		case 9:
+			direction = 0;
+			if(record == true) {
+				if(what != 9) {
+					timeEnd = System.nanoTime();
+					timeTotal = timeEnd-timeNow;
+					route.Record(what,timeTotal);
+				}
+				timeNow = System.nanoTime();
+				what = 9;
+			}
+			break;
 		}
-		else if(channel == 2) {
-			switch(remoteNum) {
-			case 1:
-				record = true;
-			case 2:
-				record = false;
-			case 3:
-				route.Play();
-				route.Play = true;
 	
-				
-				
-			}
+
+		switch(remoteChan2) {
+		case 1:
+			record = true;
+			Sound.beep();
+			break;
+		case 2:
+			record = false;
+			break;
+		case 3:
+			record = false;
+			Sound.beep();
+			Sound.beep();
+			//route.Play();
+			route.Play = true;
+			break;
+			
+			
 		}
+		
 	}
 
 	@Override
