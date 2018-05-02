@@ -29,7 +29,7 @@ public class JaateloValinta {
 					LCD.drawString("Jaatelo1", 0, 0);
 					kassaSaldo = kassaSaldo + jaatelo1;
 
-				} else {
+				} else if(Button.DOWN.isDown()){
 					i++;
 				}
 				break;
@@ -38,7 +38,7 @@ public class JaateloValinta {
 					LCD.drawString("Jaatelo2", 0, 0);
 					kassaSaldo = kassaSaldo + jaatelo2;
 
-				} else {
+				} else if(Button.DOWN.isDown()){
 					i++;
 				}
 
@@ -48,14 +48,12 @@ public class JaateloValinta {
 					LCD.drawString("Jaatelo3", 0, 0);
 					kassaSaldo = kassaSaldo + jaatelo3;
 
-				} else {
+				} else if(Button.DOWN.isDown()){
 					i++;
 				}
 				break;
 			default:
 
-				if (Button.DOWN.isDown()) {
-					i++;
 					LCD.drawString("Tulisiko viela muuta?", 0, 0);
 					LCD.drawString("Jos tulee, niin paina Enteria", 0, 0);
 					LCD.drawString("Jos ei, paina ESCAPE nappainta", 0, 0);
