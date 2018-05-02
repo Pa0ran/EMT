@@ -25,8 +25,8 @@ public class JaateloValinta {
 			switch (i) {
 
 			case 1:
+				LCD.drawString("Jaatelo1", 0, 0);	
 				if (Button.ENTER.isDown()) {
-					LCD.drawString("Jaatelo1", 0, 0);
 					kassaSaldo = kassaSaldo + jaatelo1;
 
 				} else if(Button.DOWN.isDown()){
@@ -34,8 +34,8 @@ public class JaateloValinta {
 				}
 				break;
 			case 2:
+				LCD.drawString("Jaatelo2", 0, 0);
 				if (Button.ENTER.isDown()) {
-					LCD.drawString("Jaatelo2", 0, 0);
 					kassaSaldo = kassaSaldo + jaatelo2;
 
 				} else if(Button.DOWN.isDown()){
@@ -44,8 +44,8 @@ public class JaateloValinta {
 
 				break;
 			case 3:
+				LCD.drawString("Jaatelo3", 0, 0);
 				if (Button.ENTER.isDown()) {
-					LCD.drawString("Jaatelo3", 0, 0);
 					kassaSaldo = kassaSaldo + jaatelo3;
 
 				} else if(Button.DOWN.isDown()){
