@@ -16,10 +16,10 @@ public class JaateloValinta {
 		int i = 0;
 
 		while (!Button.ESCAPE.isDown()) {
-			LCD.drawString("Päivää", 0, 0);
-			LCD.drawString("Mitä saisi olla?", 0, 0);
-			LCD.drawString("Tarjolla olisi mansikkajäätelöä, suklaajäätelöa ja lakritsijäätelöä.", 0, 0);
-			LCD.drawString("Jos haluat ostaa jäätelöä paina Enter näppäintä", 0, 0);
+			LCD.drawString("Hello", 0, 0);
+			LCD.drawString("Mita saisi olla)", 0, 0);
+			LCD.drawString("Tarjolla olisi mansikkajaateloa, suklaajaateloa ja lakritsijaateloa.", 0, 0);
+			LCD.drawString("Jos haluat ostaa jaateloa paina Enter nappainta", 0, 0);
 			LCD.clear();
 
 			switch (i) {
@@ -56,9 +56,9 @@ public class JaateloValinta {
 
 				if (Button.DOWN.isDown()) {
 					i++;
-					LCD.drawString("Tulisiko vielä muuta?", 0, 0);
-					LCD.drawString("Jos tulee, niin paina Enteriä", 0, 0);
-					LCD.drawString("Jos ei, paina ESCAPE näppäintä", 0, 0);
+					LCD.drawString("Tulisiko viela muuta?", 0, 0);
+					LCD.drawString("Jos tulee, niin paina Enteria", 0, 0);
+					LCD.drawString("Jos ei, paina ESCAPE nappainta", 0, 0);
 					if (Button.ENTER.isDown()) {
 						continue;
 					}
