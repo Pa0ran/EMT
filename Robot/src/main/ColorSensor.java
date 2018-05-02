@@ -1,18 +1,21 @@
 package main;
 
+import lejos.hardware.Button;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.robotics.Color;
 
 public class ColorSensor extends Thread {
 	private EV3ColorSensor cs;
+	private Motor motor;
 	
-	public ColorSensor(EV3ColorSensor colorSensor) {
-		cs = colorSensor;
+	public ColorSensor(EV3ColorSensor colorSensor, Motor motor) {
+		this.cs = colorSensor;
+		this.motor = motor;
 	}
 	
 	@Override
 	public void run() { //run when thread is started
-		while (true) {
+		while (!Button.ENTER.isDown()) {
 			switch(cs.getColorID()) {
 			case(Color.BLACK):
 				break;
@@ -27,6 +30,7 @@ public class ColorSensor extends Thread {
 			case(Color.GRAY):
 				break;
 			case(Color.GREEN):
+				//continue();
 				break;
 			case(Color.LIGHT_GRAY):
 				break;
@@ -39,6 +43,8 @@ public class ColorSensor extends Thread {
 			case(Color.PINK):
 				break;
 			case(Color.RED):
+				//Stop the the motors
+				motor.Stop();
 				break;
 			case(Color.WHITE):
 				break;

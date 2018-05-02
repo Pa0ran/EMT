@@ -36,6 +36,7 @@ public class ManualControl implements ControlSource {
 		return direction*360;
 	}
 	
+	/**Updates IR connection, by getting commands from channel 3 and 2*/
 	public void updateIR() {
 		float timeNow = 0;
 		float timeEnd;
@@ -48,6 +49,7 @@ public class ManualControl implements ControlSource {
 		
 		
 		switch(remoteNum) {
+		//Drive backward
 		case 1: 
 			direction = 1;
 			if(record == true) {
@@ -60,6 +62,7 @@ public class ManualControl implements ControlSource {
 				what = 1;
 			}
 			break;
+		//Drive forward
 		case 2:
 			direction = -1;
 			if(record == true) {
@@ -72,6 +75,7 @@ public class ManualControl implements ControlSource {
 				what = 2;
 			}
 			break;
+		//Steer right
 		case 3:
 			steeringAngle = 30;
 			if(record == true) {
@@ -84,6 +88,7 @@ public class ManualControl implements ControlSource {
 				what = 3;
 			}
 			break;
+		//Steer left
 		case 4:
 			steeringAngle = -30;
 			if(record == true) {
@@ -97,6 +102,7 @@ public class ManualControl implements ControlSource {
 				what = 4;
 			}
 			break;
+		//Stop
 		case 9:
 			direction = 0;
 			if(record == true) {

@@ -15,6 +15,7 @@ public class RouteManager {
 		
 	}
 	
+	/**Store what to do and for how long in twin arrays.*/
 	public void Record(int what,float howLong) {
 		int count = 0;
 		whatDo[count] = what;

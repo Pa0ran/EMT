@@ -6,13 +6,16 @@ import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
+import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.robotics.RegulatedMotor;
 
 public class Main {
+	
 	static ControlSource controls;
 	RouteManager rM;
 	Motor moottori;
+	
 	public static void main(String[] args) {
 		
 		//ir sensor
@@ -29,6 +32,11 @@ public class Main {
 		RegulatedMotor m3 = new EV3MediumRegulatedMotor(MotorPort.C);
 		
 		Motor moottori = new Motor(m1,m2,m3);
+		
+		//ColorSensor
+		EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S2);
+		ColorSensor cs = new ColorSensor(colorSensor, moottori);
+		cs.start();
 		
 		//Motor moottori = rM.moottori;
 		//irs.start();
