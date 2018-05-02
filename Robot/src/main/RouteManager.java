@@ -1,5 +1,6 @@
 package main;
 
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
@@ -7,51 +8,72 @@ import lejos.robotics.RegulatedMotor;
 
 public class RouteManager {
 	
-	int[] whatDo;
-	float[] time;
+	private Motor moottori;
+	public int[] whatDo = new int[50];
+	public float[] time = new float[50];
 	public boolean Play = false;
+	public int length = 0;
+	int count = 0;
 	//Main head = new Main();
-	public RouteManager() {
+	public RouteManager(Motor moottori) {
 		
+		this.moottori = moottori;
 	}
 	
 	/**Store what to do and for how long in twin arrays.*/
 	public void Record(int what,float howLong) {
-		int count = 0;
 		whatDo[count] = what;
 		time[count] = howLong;
 		count++;
+		length++;
+		
 	}
-	/*public void Play() {
+	public void Play() {
 		Play = true;
 		float timeStart = System.nanoTime();
 		float timeStop;
+		float currentTime;
 		while(Play == true) {
-			for(int i = 0;i<time.length;i++) {
+			for(int i = 0;i<length;i++) {
 				timeStart = System.nanoTime();
-				timeStop = timeStart + time[i];
+				timeStop = System.nanoTime() + time[i];
+				LCD.drawString(Float.toString(time[i]), 0, 5);
+				LCD.drawString(Float.toString(timeStop), 0, 6);
+				currentTime = System.nanoTime();
 				if(whatDo[i] == 1) {
-					while(time[i]< System.nanoTime()) {
-						head.moottori.drive(900);
-				
+					while(timeStop >= currentTime) {
+						moottori.drive(360);
+						currentTime = System.nanoTime();
+						LCD.drawString(Float.toString(currentTime), 0, 7);
+						
 					}
 				}
 				else if (whatDo[i] == 2) {
-					while(time[i]< System.nanoTime()) {
-						head.moottori.drive(-900);
+					
+					while(timeStop >= currentTime) {
+						moottori.drive(-360);
+						currentTime = System.nanoTime();
+						LCD.drawString(Float.toString(currentTime), 0, 7);
+						
 				
 					}
 				}
 				else if (whatDo[i] == 3) {
-					head.moottori.steer(30);
+					moottori.steer(30);
 							}
 				else if (whatDo[i] == 4) {
-					head.moottori.steer(-30);
+					moottori.steer(-30);
 				}
 				else if (whatDo[i] == 9) {
-					head.moottori.Stop();
+					while(timeStop >= currentTime) {
+						moottori.drive(0);
+						currentTime = System.nanoTime();
+						LCD.drawString(Float.toString(currentTime), 0, 7);
+						
+						
+					}
 				}
 			}
 		}
-	}*/
+	}
 }

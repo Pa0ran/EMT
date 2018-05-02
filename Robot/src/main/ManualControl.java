@@ -9,14 +9,14 @@ public class ManualControl implements ControlSource {
 	public int channel = 3;
 	int steeringAngle = 0;
 	int direction = 0;
-	int what = 0;
-	
-	RouteManager route = new RouteManager();
+	int what = 1;
+	private RouteManager route;
 	IRSensor ir;
 	
 	/**get irsensor and start its thread*/
-	public ManualControl(IRSensor ir) {	
+	public ManualControl(IRSensor ir,RouteManager rM) {	
 		this.ir = ir;
+		this.route = rM;
 		ir.start();
 	}
 	
@@ -38,7 +38,7 @@ public class ManualControl implements ControlSource {
 	
 	/**Updates IR connection, by getting commands from channel 3 and 2*/
 	public void updateIR() {
-		float timeNow = 0;
+		float timeNow = System.nanoTime();
 		float timeEnd;
 		float timeTotal;
 		int remoteNum = ir.getRemotecmd(3);
@@ -130,8 +130,11 @@ public class ManualControl implements ControlSource {
 			record = false;
 			Sound.beep();
 			Sound.beep();
-			//route.Play();
+			route.Play();
 			route.Play = true;
+			break;
+		case 4:
+			route.Play = false;
 			break;
 			
 			

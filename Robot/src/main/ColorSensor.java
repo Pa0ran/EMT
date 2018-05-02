@@ -7,10 +7,13 @@ import lejos.robotics.Color;
 public class ColorSensor extends Thread {
 	private EV3ColorSensor cs;
 	private Motor motor;
+	public boolean Stop;
+	
 	
 	public ColorSensor(EV3ColorSensor colorSensor, Motor motor) {
 		this.cs = colorSensor;
 		this.motor = motor;
+		
 	}
 	
 	@Override
@@ -31,6 +34,7 @@ public class ColorSensor extends Thread {
 				break;
 			case(Color.GREEN):
 				//continue();
+				Stop = false;
 				break;
 			case(Color.LIGHT_GRAY):
 				break;
@@ -44,7 +48,7 @@ public class ColorSensor extends Thread {
 				break;
 			case(Color.RED):
 				//Stop the the motors
-				motor.Stop();
+				Stop = true;
 				break;
 			case(Color.WHITE):
 				break;

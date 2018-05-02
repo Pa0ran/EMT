@@ -18,13 +18,9 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		//ir sensor
-		EV3IRSensor irSensor = new EV3IRSensor(SensorPort.S1);
-		IRSensor irs = new IRSensor(irSensor);
-		controls = new ManualControl(irs);
+	
 		
-		//routemanager
-		RouteManager rM = new RouteManager();
+		
 		
 		//motors
 		RegulatedMotor m1 = new EV3LargeRegulatedMotor(MotorPort.A);
@@ -33,6 +29,13 @@ public class Main {
 		
 		Motor moottori = new Motor(m1,m2,m3);
 		
+		//routemanager
+				RouteManager rM = new RouteManager(moottori);
+		//ir sensor
+		EV3IRSensor irSensor = new EV3IRSensor(SensorPort.S1);
+		IRSensor irs = new IRSensor(irSensor);
+		controls = new ManualControl(irs,rM);
+				
 		//ColorSensor
 		EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S2);
 		ColorSensor cs = new ColorSensor(colorSensor, moottori);
@@ -41,13 +44,19 @@ public class Main {
 		//Motor moottori = rM.moottori;
 		//irs.start();
 		while(!Button.ENTER.isDown()) {
+			if(cs.Stop == false) {
 			moottori.drive(controls.getMotorSpeed());
 			moottori.steer(controls.getSteeringAngle());
 			}
+			else {
+				moottori.drive(0);
+			}
+			
 			
 			
 			
 		}
 	
 	
+	}
 }
