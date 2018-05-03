@@ -31,7 +31,7 @@ public class JaateloValinta {
 					LCD.drawString("Jaatelo1: 2.50", 0, 2);
 					if (Button.ENTER.isDown()) {
 						kassaSaldo = kassaSaldo + jaatelo1;
-
+                        i = 4;
 					} else if (Button.DOWN.isDown()) {
 						i++;
 					}
@@ -40,7 +40,7 @@ public class JaateloValinta {
 					LCD.drawString("Jaatelo2: 3.25", 0, 2);
 					if (Button.ENTER.isDown()) {
 						kassaSaldo = kassaSaldo + jaatelo2;
-
+                        i = 4;
 					} else if (Button.DOWN.isDown()) {
 						i++;
 					} else if (Button.UP.isDown()) {
@@ -52,14 +52,17 @@ public class JaateloValinta {
 					LCD.drawString("Jaatelo3: 1.50", 0, 2);
 					if (Button.ENTER.isDown()) {
 						kassaSaldo = kassaSaldo + jaatelo3;
+						i = 4;
 
 					} else if (Button.DOWN.isDown()) {
 						i = 1;
 					} else if (Button.UP.isDown()) {
 						i--;
 					}
+					
 
 					break;
+					
 				default:
 
 					LCD.drawString("Tulisiko viela muuta?", 0, 0);
