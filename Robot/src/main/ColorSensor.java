@@ -9,7 +9,6 @@ public class ColorSensor extends Thread {
 	private EV3ColorSensor cs;
 	private Motor motor;
 	public boolean Stop;
-//	public boolean shopOpen = false;
 	private JaateloValinta jaatelo = new JaateloValinta();
 	
 	public ColorSensor(EV3ColorSensor colorSensor, Motor motor) {
@@ -26,13 +25,10 @@ public class ColorSensor extends Thread {
 				break;
 			case(Color.BLUE):
 				//----------------------------------------------------------------------------
-//				if (!shopOpen) {
-					LCD.drawString("I'm seeing BLUE!!!", 0, 2); //for debug
-//					shopOpen = true; //prevents shop from opening twice
-					jaatelo.starttaa(); //for reference
-//					shopOpen = false; //assuming that the code is stuck in the "jaatelo" for its execution time
-					//change shopOpen to false before closing the shop so that it can't open twice
-//				}
+				Stop = true;
+				LCD.drawString("I'm seeing BLUE!!!", 0, 2); //for debug
+				jaatelo.starttaa();
+				Stop = false;
 				//-----------------------------------------------------------------------------
 				break;
 			case(Color.BROWN):
