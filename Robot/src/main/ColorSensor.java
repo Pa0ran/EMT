@@ -29,7 +29,7 @@ public class ColorSensor extends Thread {
 				if (!shopOpen) {
 					LCD.drawString("I'm seeing BLUE!!!", 0, 2); //for debug
 					shopOpen = true; //prevents shop from opening twice
-					jaatelo = new JaateloValinta(1, 2, 3, 10); //for reference
+					jaatelo = new JaateloValinta(); //for reference
 					shopOpen = false; //assuming that the code is stuck in the "jaatelo" for its execution time
 					//change shopOpen to false before closing the shop so that it can't open twice
 				}
