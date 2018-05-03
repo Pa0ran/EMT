@@ -12,7 +12,7 @@ public class RouteManager {
 	private Motor moottori;
 	public int[] whatDo = new int[50];
 	public float[] time = new float[50];
-	float[] route1Time = {5*b,5*b,10*b,1*b,2*b};
+	float[] route1Time = {3*b,3*b,2*b,1*b,3*b};
 	public int[] route1what = {2,1,9,4,1};
 	public boolean Play = false;
 	public int length = 0;
@@ -30,20 +30,22 @@ public class RouteManager {
 		length++;
 		
 	}
+	// play prerecorded route;
 	public void Route1() {
+		//starting time
 		float timeNow = System.nanoTime();
+		//current time
 		float currentTime = System.nanoTime();
 	
-		
-		for(int i = 0;i<length;i++) {
+		//loop goes trough all pre-recorded commands
+		for(int i = 0;i<route1Time.length;i++) {
 			 {
-
+				 
 				if(route1what[i] == 1) {
 					while(currentTime<=timeNow+ route1Time[i] ){
 						moottori.drive(360);
 						currentTime = System.nanoTime();
-						LCD.drawString(Float.toString(currentTime), 0, 7);
-						LCD.drawString(Float.toString(timeNow+ route1Time[i]), 0, 6);
+						
 					}
 					timeNow = System.nanoTime();
 				}
@@ -52,8 +54,7 @@ public class RouteManager {
 					while(currentTime<=timeNow+ route1Time[i] ) {
 						moottori.drive(-360);
 						currentTime = System.nanoTime();
-						LCD.drawString(Float.toString(currentTime), 0, 7);
-						LCD.drawString(Float.toString(timeNow+ route1Time[i]), 0, 6);
+						
 				
 					}
 					timeNow = System.nanoTime();
@@ -70,8 +71,6 @@ public class RouteManager {
 					while(currentTime<=timeNow+ route1Time[i] ) {
 						moottori.drive(0);
 						currentTime = System.nanoTime();
-						LCD.drawString(Float.toString(currentTime), 0, 7);
-						LCD.drawString(Float.toString(timeNow+ route1Time[i]), 0, 6);
 						
 						
 					}
@@ -83,27 +82,29 @@ public class RouteManager {
 	// play the recorded route
 	public void Play() {
 		Play = true;
+		//starting time
 		float timeNow = System.nanoTime();
-		float timeStop;
+		//current time
 		float currentTime = System.nanoTime();
 		while(Play == true) {
-			for(int i = 0;i<length;i++) {
+			for(int i = 0;i<=length;i++) {
 				if(whatDo[i] == 1) {
-					while(currentTime<=timeNow+ route1Time[i] ){
+					while(currentTime<=timeNow+ route1Time[i] && Play == true){
 						moottori.drive(360);
 						currentTime = System.nanoTime();
 						LCD.drawString(Float.toString(currentTime), 0, 7);
-						LCD.drawString(Float.toString(timeNow+ route1Time[i]), 0, 6);
+						LCD.drawString(Float.toString(timeNow+route1Time[i]), 0, 6);
+						LCD.drawInt(length,0,5);
+						LCD.drawInt(i,0,4);
 					}
 					timeNow = System.nanoTime();
 				}
 				else if (whatDo[i] == 2) {
 					
-					while(currentTime<=timeNow+ route1Time[i] ) {
+					while(currentTime<=timeNow+ route1Time[i] && Play == true) {
 						moottori.drive(-360);
 						currentTime = System.nanoTime();
-						LCD.drawString(Float.toString(currentTime), 0, 7);
-						LCD.drawString(Float.toString(timeNow+ route1Time[i]), 0, 6);
+						
 				
 					}
 					timeNow = System.nanoTime();
@@ -117,17 +118,15 @@ public class RouteManager {
 					timeNow = System.nanoTime();
 				}
 				else if (whatDo[i] == 9) {
-					while(currentTime<=timeNow+ route1Time[i] ) {
+					while(currentTime<=timeNow+ route1Time[i] && Play == true) {
 						moottori.drive(0);
 						currentTime = System.nanoTime();
-						LCD.drawString(Float.toString(currentTime), 0, 7);
-						LCD.drawString(Float.toString(timeNow+ route1Time[i]), 0, 6);
-						
 						
 					}
 					timeNow = System.nanoTime();
 				}
 			}
+			Play = false;
 		}
 	}
 }
