@@ -45,13 +45,13 @@ public class Main {
 		//ir sensor
 		EV3IRSensor irSensor = new EV3IRSensor(SensorPort.S1);
 		IRSensor irs = new IRSensor(irSensor);
-		controls = new ManualControl(irs,rM);
+		controls = new ManualControl(irs,rM,music);
 				
 		//ColorSensor
 		EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S2);
 		ColorSensor cs = new ColorSensor(colorSensor, moottori);
 		cs.start();
-		music.play();	
+		//music.play();	
 		while(!Button.ENTER.isDown()) {
 			//draw pictures of ice cream example
 			//g.drawImage(Images.getImage(1), 0, 0,0);

@@ -11,13 +11,15 @@ public class ManualControl implements ControlSource {
 	int direction = 0;
 	int what = 1;
 	private RouteManager route;
+	private Music music;
 	public boolean playmusic;
 	IRSensor ir;
 	
 	/**get irsensor and start its thread*/
-	public ManualControl(IRSensor ir,RouteManager rM) {	
+	public ManualControl(IRSensor ir,RouteManager rM,Music music) {	
 		this.ir = ir;
 		this.route = rM;
+		this.music = music;
 		ir.start();
 	}
 	
@@ -42,15 +44,15 @@ public class ManualControl implements ControlSource {
 		float timeNow = System.nanoTime();
 		float timeEnd;
 		float timeTotal;
-		int remoteNum = ir.getRemotecmd(3);
+		int remoteChan3 = ir.getRemotecmd(3);
 		int remoteChan2 = ir.getRemotecmd(2);
 		int remoteChan1 = ir.getRemotecmd(1);
+		int remoteChan0 = ir.getRemotecmd(0);
 		LCD.drawString("Hello", 0, 0);
-		LCD.drawInt(remoteNum,0,1);
 		LCD.drawInt(channel,0,4);
 		
 		
-		switch(remoteNum) {
+		switch(remoteChan3) {
 		//Drive backward
 		case 1: 
 			direction = 1;
@@ -121,19 +123,17 @@ public class ManualControl implements ControlSource {
 	
 
 		switch(remoteChan2) {
+		//start recording
 		case 1:
 			record = true;
 			Sound.beep();
 			break;
+		
+		//stop recording
 		case 2:
-			if(playmusic == false) {
-			playmusic = true;
-			}
-			else
-			{
-				playmusic = false;
-			}
+			record = false;
 			break;
+		//drive recorded route
 		case 3:
 			record = false;
 			Sound.beep();
@@ -141,12 +141,14 @@ public class ManualControl implements ControlSource {
 			route.Play();
 			route.Play = true;
 			break;
+		// cancel current route
 		case 4:
 			route.Play = false;
 			break;
 			
 			
 		}
+		//play prerecorded route
 		switch(remoteChan1) {
 		case 1:
 			route.Route1();
@@ -156,6 +158,13 @@ public class ManualControl implements ControlSource {
 			
 			
 		}
+		//play music
+		switch(remoteChan0) {
+		case 1:
+			music.play();
+			break;
+		}
+		
 	}
 
 	@Override
