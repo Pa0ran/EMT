@@ -4,7 +4,7 @@ import java.io.File;
 
 import lejos.hardware.Sound;
 
-public class Music {
+public class Music extends Thread{
 	
 	public void play() {
 	

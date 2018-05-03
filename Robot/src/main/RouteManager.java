@@ -107,6 +107,7 @@ public class RouteManager {
 						
 				
 					}
+					//updates the starting time for the next move
 					timeNow = System.nanoTime();
 				}
 				else if (whatDo[i] == 3) {
@@ -126,6 +127,7 @@ public class RouteManager {
 					timeNow = System.nanoTime();
 				}
 			}
+			//set play to false to exit the loop after one completion
 			Play = false;
 		}
 	}

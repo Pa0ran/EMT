@@ -28,19 +28,18 @@ public class Main {
 		
 		
 		JaateloValinta jv = new JaateloValinta();
-		jv.starttaa();
 		GraphicsLCD  g = BrickFinder.getDefault().getGraphicsLCD();
 		g.setAutoRefresh(false);
-		final int SW = g.getWidth();
-		final int SH = g.getHeight();
 		//motors
 		RegulatedMotor m1 = new EV3LargeRegulatedMotor(MotorPort.A);
 		RegulatedMotor m2 = new EV3LargeRegulatedMotor(MotorPort.B);
 		RegulatedMotor m3 = new EV3MediumRegulatedMotor(MotorPort.C);
 		
 		Motor moottori = new Motor(m1,m2,m3);
+		// music
 		
 		Music music = new Music();
+		music.start();
 		//routemanager
 		RouteManager rM = new RouteManager(moottori);
 		//ir sensor
@@ -57,6 +56,7 @@ public class Main {
 			//draw pictures of ice cream example
 			//g.drawImage(Images.getImage(1), 0, 0,0);
 			//g.refresh();
+			//jv.starttaa();
 			if(cs.Stop == false) {
 			moottori.drive(controls.getMotorSpeed());
 			moottori.steer(controls.getSteeringAngle());
