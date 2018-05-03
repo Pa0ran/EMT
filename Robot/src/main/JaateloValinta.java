@@ -1,4 +1,4 @@
-package main;
+
 
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
@@ -34,8 +34,6 @@ public class JaateloValinta {
 
 					} else if (Button.DOWN.isDown()) {
 						i++;
-					} else if (Button.UP.isDown()) {
-						i--;
 					}
 					break;
 				case 2:
@@ -56,7 +54,7 @@ public class JaateloValinta {
 						kassaSaldo = kassaSaldo + jaatelo3;
 
 					} else if (Button.DOWN.isDown()) {
-						i = 0;
+						i = 1;
 					} else if (Button.UP.isDown()) {
 						i--;
 					}
@@ -67,10 +65,11 @@ public class JaateloValinta {
 					LCD.drawString("Tulisiko viela muuta?", 0, 0);
 					LCD.drawString("Jos tulee, niin paina Enteria", 0, 1);
 					LCD.drawString("Jos ei, paina ESCAPE nappainta", 0, 2);
+					
 					if (Button.ESCAPE.isDown()) {
 						break;
 					}
-
+                    break;
 				}
 			}
 			break;
@@ -78,4 +77,3 @@ public class JaateloValinta {
 
 	}
 }
-
