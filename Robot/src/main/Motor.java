@@ -20,46 +20,6 @@ public class Motor {
 		mA.synchronizeWith(new RegulatedMotor[] { mB }); // Synchronize rightmotor with left
 	}
 
-	/** Stops the driving motors */
-	public void Stop() {
-		mA.rotate(0);
-		mB.rotate(0);
-		mA.stop();
-		mB.stop();
-	}
-
-	/**
-	 * Drives forwards by rotating motors by one turn in sync. Returns after
-	 * rotation is complete
-	 */
-	public void DriveForward() {
-		mA.startSynchronization();
-		mA.rotate(-360);
-		mB.rotate(-360);
-		mA.endSynchronization();
-	}
-
-	/**
-	 * Drives backwards by rotating motors by one turn i sync. Returns after
-	 * rotation is complete
-	 */
-	public void DriveBackward() {
-		mA.startSynchronization();
-		mA.rotate(360);
-		mB.rotate(360);
-		mA.endSynchronization();
-	}
-
-	/** Sets steering wheels rotation to 30 degrees */
-	public void DriveLeft() {
-		mC.rotate(30);
-	}
-
-	/** Sets steering wheels rotation to -30 degrees */
-	public void DriveRight() {
-		mC.rotate(-30);
-	}
-
 	/**
 	 * Drive given amount of degrees. Synchronous. Positive is backward and negative
 	 * is forward
@@ -78,13 +38,7 @@ public class Motor {
 		mC.rotate(angle);
 	}
 
-	/** Drive forwards(1) or backwards(2), based on the argument 1 or 2 */
-	public void KeepDriving(int keep) {
-		if (keep == 1) {
-			DriveForward();
-		} else if (keep == 2) {
-			DriveBackward();
-		}
-	}
+	
+	
 
 }
