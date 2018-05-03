@@ -1,7 +1,10 @@
 package main;
 
+import java.io.File;
+
 import lejos.hardware.BrickFinder;
 import lejos.hardware.Button;
+import lejos.hardware.Sound;
 import lejos.hardware.lcd.GraphicsLCD;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
@@ -23,7 +26,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-	
+		
 		
 		GraphicsLCD  g = BrickFinder.getDefault().getGraphicsLCD();
 		g.setAutoRefresh(false);
@@ -36,8 +39,9 @@ public class Main {
 		
 		Motor moottori = new Motor(m1,m2,m3);
 		
+		Music music = new Music();
 		//routemanager
-				RouteManager rM = new RouteManager(moottori);
+		RouteManager rM = new RouteManager(moottori);
 		//ir sensor
 		EV3IRSensor irSensor = new EV3IRSensor(SensorPort.S1);
 		IRSensor irs = new IRSensor(irSensor);
@@ -47,21 +51,20 @@ public class Main {
 		EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S2);
 		ColorSensor cs = new ColorSensor(colorSensor, moottori);
 		cs.start();
-		
-		//Motor moottori = rM.moottori;
-		//irs.start();
-		int i = 1;
+		music.play();	
 		while(!Button.ENTER.isDown()) {
-			
-			g.drawRegion(Images.getImage(i), 0, 0, SW, SH, GraphicsLCD.TRANS_NONE, SW/2, SH/2, GraphicsLCD.HCENTER | GraphicsLCD.VCENTER);
-			g.refresh();
-			/*if(cs.Stop == false) {
+			//draw pictures of ice cream example
+			//g.drawImage(Images.getImage(1), 0, 0,0);
+			//g.refresh();
+			if(cs.Stop == false) {
 			moottori.drive(controls.getMotorSpeed());
 			moottori.steer(controls.getSteeringAngle());
 			}
 			else {
 				moottori.drive(0);
-			}*/
+			}
+			
+			
 			
 			
 			
@@ -70,4 +73,5 @@ public class Main {
 	
 	
 	}
+	
 }

@@ -11,6 +11,7 @@ public class ManualControl implements ControlSource {
 	int direction = 0;
 	int what = 1;
 	private RouteManager route;
+	public boolean playmusic;
 	IRSensor ir;
 	
 	/**get irsensor and start its thread*/
@@ -43,6 +44,7 @@ public class ManualControl implements ControlSource {
 		float timeTotal;
 		int remoteNum = ir.getRemotecmd(3);
 		int remoteChan2 = ir.getRemotecmd(2);
+		int remoteChan1 = ir.getRemotecmd(1);
 		LCD.drawString("Hello", 0, 0);
 		LCD.drawInt(remoteNum,0,1);
 		LCD.drawInt(channel,0,4);
@@ -124,7 +126,13 @@ public class ManualControl implements ControlSource {
 			Sound.beep();
 			break;
 		case 2:
-			record = false;
+			if(playmusic == false) {
+			playmusic = true;
+			}
+			else
+			{
+				playmusic = false;
+			}
 			break;
 		case 3:
 			record = false;
@@ -139,7 +147,15 @@ public class ManualControl implements ControlSource {
 			
 			
 		}
+		switch(remoteChan1) {
+		case 1:
+			route.Route1();
+			break;
+		case 2:
 		
+			
+			
+		}
 	}
 
 	@Override

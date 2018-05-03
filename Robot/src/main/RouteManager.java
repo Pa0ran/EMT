@@ -11,10 +11,11 @@ public class RouteManager {
 	private Motor moottori;
 	public int[] whatDo = new int[50];
 	public float[] time = new float[50];
+	float[] route1Time = new float[5];
+	public int[] route1what = new int[5];
 	public boolean Play = false;
 	public int length = 0;
 	int count = 0;
-	//Main head = new Main();
 	public RouteManager(Motor moottori) {
 		
 		this.moottori = moottori;
@@ -28,6 +29,54 @@ public class RouteManager {
 		length++;
 		
 	}
+	public void Route1() {
+		float timeNow = System.nanoTime();
+		float currentTime = System.nanoTime();
+		for(int i = 0;i<route1what.length;i++) {
+			 {
+
+				if(route1what[i] == 1) {
+					while(currentTime<=timeNow+ route1Time[i] ){
+						moottori.drive(360);
+						currentTime = System.nanoTime();
+						
+						
+					}
+					timeNow = System.nanoTime();
+				}
+				else if (route1what[i] == 2) {
+					
+					while(currentTime<=timeNow+ route1Time[i] ) {
+						moottori.drive(-360);
+						currentTime = System.nanoTime();
+						
+						
+				
+					}
+					timeNow = System.nanoTime();
+				}
+				else if (route1what[i] == 3) {
+					moottori.steer(30);
+					timeNow = System.nanoTime();
+							}
+				else if (route1what[i] == 4) {
+					moottori.steer(-30);
+					timeNow = System.nanoTime();
+				}
+				else if (route1what[i] == 9) {
+					while(currentTime<=timeNow+ route1Time[i] ) {
+						moottori.drive(0);
+						currentTime = System.nanoTime();
+						
+						
+						
+					}
+					timeNow = System.nanoTime();
+				}
+			}
+		}
+	}
+	// play the recorded route
 	public void Play() {
 		Play = true;
 		float timeStart = System.nanoTime();
