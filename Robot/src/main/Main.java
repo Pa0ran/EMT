@@ -56,7 +56,6 @@ public class Main {
 			//draw pictures of ice cream example
 			//g.drawImage(Images.getImage(1), 0, 0,0);
 			//g.refresh();
-			//jv.starttaa();
 			if(cs.Stop == false) {
 			moottori.drive(controls.getMotorSpeed());
 			moottori.steer(controls.getSteeringAngle());
