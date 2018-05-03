@@ -15,8 +15,8 @@ public class Motor {
 		this.mA = mA;
 		this.mB = mB;
 		this.mC = mC;
-		this.mA.setSpeed(300);
-		this.mB.setSpeed(300);
+		this.mA.setSpeed(900);
+		this.mB.setSpeed(900);
 		mA.synchronizeWith(new RegulatedMotor[] { mB }); // Synchronize rightmotor with left
 	}
 
