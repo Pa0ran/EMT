@@ -27,7 +27,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		
-		
+		JaateloValinta jv = new JaateloValinta();
+		jv.starttaa();
 		GraphicsLCD  g = BrickFinder.getDefault().getGraphicsLCD();
 		g.setAutoRefresh(false);
 		final int SW = g.getWidth();
