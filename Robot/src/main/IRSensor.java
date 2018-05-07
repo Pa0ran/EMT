@@ -1,13 +1,15 @@
 package main;
+
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
-import lejos.hardware.motor.EV3LargeRegulatedMotor;
-import lejos.hardware.motor.EV3MediumRegulatedMotor;
-import lejos.hardware.port.MotorPort;
 import lejos.hardware.sensor.EV3IRSensor;
-import lejos.robotics.RegulatedMotor;
-import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
+
+/**
+ * @author	Niklas Malinen
+ * @version	1.0
+ * @since	7.5.2018
+ */
 
 public class IRSensor extends Thread {
 	private EV3IRSensor infraredSensor;

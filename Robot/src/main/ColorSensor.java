@@ -5,29 +5,33 @@ import lejos.hardware.lcd.LCD;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.robotics.Color;
 
+/**
+ * @author	Sam Hemming, Niklas Malinen
+ * @version	1.0
+ * @since	7.5.2018
+ */
+
 public class ColorSensor extends Thread {
-	private EV3ColorSensor cs;
-	private Motor motor;
-	public boolean Stop;
-	private JaateloValinta jaatelo = new JaateloValinta();
 	
-	public ColorSensor(EV3ColorSensor colorSensor, Motor motor) {
-		this.cs = colorSensor;
-		this.motor = motor;
-		
+	private EV3ColorSensor colorSensor;
+	public boolean Stop;
+	private JaateloValinta icecreamMenu = new JaateloValinta();
+	
+	public ColorSensor(EV3ColorSensor colorSensor) {
+		this.colorSensor = colorSensor;
 	}
 	
 	@Override
 	public void run() { //run when thread is started
 		while (!Button.ENTER.isDown()) {
-			switch(cs.getColorID()) {
+			switch(colorSensor.getColorID()) {
 			case(Color.BLACK):
 				break;
 			case(Color.BLUE):
 				//----------------------------------------------------------------------------
 				Stop = true;
 				LCD.drawString("I'm seeing BLUE!!!", 0, 2); //for debug
-				jaatelo.starttaa();
+				icecreamMenu.starttaa();
 				Stop = false;
 				//-----------------------------------------------------------------------------
 				break;

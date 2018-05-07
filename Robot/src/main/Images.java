@@ -2,6 +2,12 @@ package main;
 
 import lejos.hardware.lcd.Image;
 
+/**
+ * @author	Esko Koskinen
+ * @version	1.0
+ * @since	7.5.2018
+ */
+
 public class Images {
 	static final int JAATELO_1 = 0;
 	static final int JAATELO_2 = 1;

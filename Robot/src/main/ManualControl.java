@@ -3,6 +3,12 @@ package main;
 import lejos.hardware.Sound;
 import lejos.hardware.lcd.LCD;
 
+/**
+ * @author	Niklas Malinen, Esko Koskinen
+ * @version	1.0
+ * @since	7.5.2018
+ */
+
 public class ManualControl implements ControlSource {
 	
 	public boolean record = false;
@@ -161,7 +167,7 @@ public class ManualControl implements ControlSource {
 		//play music
 		switch(remoteChan0) {
 		case 1:
-			music.play();
+			music.start();
 			break;
 		}
 		

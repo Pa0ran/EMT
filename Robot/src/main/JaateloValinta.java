@@ -1,10 +1,15 @@
 package main;
 
-
 import lejos.hardware.BrickFinder;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.GraphicsLCD;
 import lejos.hardware.lcd.LCD;
+
+/**
+ * @author	Niklas Malinen, Esko Koskinen, Ilirjana Zymberi
+ * @version	1.0
+ * @since	7.5.2018
+ */
 
 public class JaateloValinta {
 	double jaatelo1;

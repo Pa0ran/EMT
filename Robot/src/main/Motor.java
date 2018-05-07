@@ -2,6 +2,12 @@ package main;
 
 import lejos.robotics.RegulatedMotor;
 
+/**
+ * @author	Niklas Malinen, Esko Koskinen
+ * @version	1.0
+ * @since	7.5.2018
+ */
+
 public class Motor {
 
 	/** LeftMotor */

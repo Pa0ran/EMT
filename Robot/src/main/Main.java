@@ -34,7 +34,6 @@ public class Main {
 
 		// music
 		Music music = new Music();
-		music.start();
 
 		// routemanager
 		RouteManager routeManager = new RouteManager(motor);
@@ -46,13 +45,10 @@ public class Main {
 
 		// ColorSensor
 		EV3ColorSensor colorSensorEV3 = new EV3ColorSensor(SensorPort.S2);
-		ColorSensor colorSensor = new ColorSensor(colorSensorEV3, motor);
+		ColorSensor colorSensor = new ColorSensor(colorSensorEV3);
 		colorSensor.start();
 
 		while (!Button.ENTER.isDown()) {
-			// draw pictures of ice cream example
-			// g.drawImage(Images.getImage(1), 0, 0,0);
-			// g.refresh();
 			if (colorSensor.Stop == false) {
 				motor.drive(controlSource.getMotorSpeed());
 				motor.steer(controlSource.getSteeringAngle());
