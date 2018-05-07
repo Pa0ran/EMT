@@ -4,6 +4,7 @@ import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.robotics.Color;
+import lejos.utility.Delay;
 
 /**
  * @author	Sam Hemming, Niklas Malinen
@@ -20,54 +21,36 @@ public class ColorSensor extends Thread {
 	public ColorSensor(EV3ColorSensor colorSensor) {
 		this.colorSensor = colorSensor;
 	}
-	
+	/**
+	 * Loops and gets colorSensors ColorID every 10ms
+	 * Starts icecreamMenu.run() on blue
+	 * Stops on red
+	 * Runs on green
+	 */
 	@Override
 	public void run() { //run when thread is started
 		while (!Button.ENTER.isDown()) {
 			switch(colorSensor.getColorID()) {
-			case(Color.BLACK):
-				break;
 			case(Color.BLUE):
 				//----------------------------------------------------------------------------
 				Stop = true;
-				LCD.drawString("I'm seeing BLUE!!!", 0, 2); //for debug
+				//LCD.drawString("I'm seeing BLUE!!!", 0, 2); //for debug
 				icecreamMenu.starttaa();
 				Stop = false;
 				//-----------------------------------------------------------------------------
-				break;
-			case(Color.BROWN):
-				break;
-			case(Color.CYAN):
-				break;
-			case(Color.DARK_GRAY):
-				break;
-			case(Color.GRAY):
 				break;
 			case(Color.GREEN):
 				//continue();
 				Stop = false;
 				break;
-			case(Color.LIGHT_GRAY):
-				break;
-			case(Color.MAGENTA):
-				break;
-			case(Color.NONE):
-				break;
-			case(Color.ORANGE):
-				break;
-			case(Color.PINK):
-				break;
 			case(Color.RED):
 				//Stop the the motors
 				Stop = true;
 				break;
-			case(Color.WHITE):
-				break;
-			case(Color.YELLOW):
-				break;
 			default:
 				break;
 			}
+			Delay.msDelay(10);
 		}
 	}
 }

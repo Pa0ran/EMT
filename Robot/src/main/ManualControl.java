@@ -2,6 +2,7 @@ package main;
 
 import lejos.hardware.Sound;
 import lejos.hardware.lcd.LCD;
+import lejos.utility.Delay;
 
 /**
  * @author	Niklas Malinen, Esko Koskinen
@@ -11,25 +12,32 @@ import lejos.hardware.lcd.LCD;
 
 public class ManualControl implements ControlSource {
 	
-	public boolean record = false;
-	public int channel = 3;
+	public boolean Record = false;
+	public int Channel = 3;
 	int steeringAngle = 0;
 	int direction = 0;
 	int what = 1;
-	private RouteManager route;
+	private RouteManager routeManager;
 	private Music music;
-	public boolean playmusic;
-	IRSensor ir;
+	public boolean Playmusic;
+	IRSensor infraredSensor;
 	
-	/**get irsensor and start its thread*/
+	/**
+	 * get irsensor and start its thread
+	 * @param	IRSensor ir, RouteManager rM, Music music
+	 * 
+	 */
 	public ManualControl(IRSensor ir,RouteManager rM,Music music) {	
-		this.ir = ir;
-		this.route = rM;
+		this.infraredSensor = ir;
+		this.routeManager = rM;
 		this.music = music;
 		ir.start();
 	}
 	
-	/**gets stearingAngle, returns it and then sets it to 0*/
+	/**
+	 * gets stearingAngle, returns it and then sets it to 0
+	 * @return	int steeringAngle = -30 or 30
+	 */
 	@Override
 	public int getSteeringAngle() {
 		updateIR();
@@ -38,139 +46,143 @@ public class ManualControl implements ControlSource {
 		return temp;
 	}
 
-	/**returns motors direction*360 and calls 'updateIR()'*/
+	/**
+	 * returns motors direction*360 and calls 'updateIR()'
+	 * @return	int direction*360 = -360, 0 or 360
+	 */
 	@Override
 	public int getMotorSpeed() {
 		updateIR();
 		return direction*360;
 	}
 	
-	/**Updates IR connection, by getting commands from channel 3 and 2*/
+	/**
+	 * Updates IR connection, by getting commands from channel 3 and 2
+	 * 
+	 * 
+	 */
 	public void updateIR() {
-		float timeNow = System.nanoTime();
+		float timeStart = System.nanoTime();
 		float timeEnd;
-		float timeTotal;
-		int remoteChan3 = ir.getRemotecmd(3);
-		int remoteChan2 = ir.getRemotecmd(2);
-		int remoteChan1 = ir.getRemotecmd(1);
-		int remoteChan0 = ir.getRemotecmd(0);
+		float timeElapsed;
+		int remoteChan3 = infraredSensor.getRemotecmd(3);
+		int remoteChan2 = infraredSensor.getRemotecmd(2);
+		int remoteChan1 = infraredSensor.getRemotecmd(1);
+		int remoteChan0 = infraredSensor.getRemotecmd(0);
 		LCD.drawString("Hello", 0, 0);
-		LCD.drawInt(channel,0,4);
-		
-		
-		switch(remoteChan3) {
-		//Drive backward
-		case 1: 
+		LCD.drawInt(Channel, 0, 4);
+
+		switch (remoteChan3) {
+		// Drive backward
+		case 1:
 			direction = 1;
-			if(record == true) {
-				if(what != 1) {
+			if (Record == true) {
+				if (what != 1) {
 					timeEnd = System.nanoTime();
-					timeTotal = timeEnd-timeNow;
-					route.Record(what,timeTotal);
+					timeElapsed = timeEnd - timeStart;
+					routeManager.Record(what, timeElapsed);
 				}
-				timeNow = System.nanoTime();
+				timeStart = System.nanoTime();
 				what = 1;
 			}
 			break;
-		//Drive forward
+		// Drive forward
 		case 2:
 			direction = -1;
-			if(record == true) {
-				if(what != 2) {
+			if (Record == true) {
+				if (what != 2) {
 					timeEnd = System.nanoTime();
-					timeTotal = timeEnd-timeNow;
-					route.Record(what,timeTotal);
+					timeElapsed = timeEnd - timeStart;
+					routeManager.Record(what, timeElapsed);
 				}
-				timeNow = System.nanoTime();
+				timeStart = System.nanoTime();
 				what = 2;
 			}
 			break;
-		//Steer right
+		// Steer right
 		case 3:
 			steeringAngle = 30;
-			if(record == true) {
-				if(what != 3) {
+			if (Record == true) {
+				if (what != 3) {
 					timeEnd = System.nanoTime();
-					timeTotal = timeEnd-timeNow;
-					route.Record(what,timeTotal);
+					timeElapsed = timeEnd - timeStart;
+					routeManager.Record(what, timeElapsed);
 				}
-				timeNow = System.nanoTime();
+				timeStart = System.nanoTime();
 				what = 3;
 			}
 			break;
-		//Steer left
+		// Steer left
 		case 4:
 			steeringAngle = -30;
-			if(record == true) {
-				if(what != 4) {
+			if (Record == true) {
+				if (what != 4) {
 					timeEnd = System.nanoTime();
-					timeTotal = timeEnd-timeNow;
-					route.Record(what,timeTotal);
-					
+					timeElapsed = timeEnd - timeStart;
+					routeManager.Record(what, timeElapsed);
+
 				}
-				timeNow = System.nanoTime();
+				timeStart = System.nanoTime();
 				what = 4;
 			}
 			break;
-		//Stop
+		// Stop
 		case 9:
 			direction = 0;
-			if(record == true) {
-				if(what != 9) {
+			if (Record == true) {
+				if (what != 9) {
 					timeEnd = System.nanoTime();
-					timeTotal = timeEnd-timeNow;
-					route.Record(what,timeTotal);
+					timeElapsed = timeEnd - timeStart;
+					routeManager.Record(what, timeElapsed);
 				}
-				timeNow = System.nanoTime();
+				timeStart = System.nanoTime();
 				what = 9;
 			}
 			break;
 		}
-	
 
-		switch(remoteChan2) {
-		//start recording
+		switch (remoteChan2) {
+		// start recording
 		case 1:
-			record = true;
+			Record = true;
 			Sound.beep();
 			break;
-		
-		//stop recording
+		// stop recording
 		case 2:
-			record = false;
+			Record = false;
 			break;
-		//drive recorded route
+		// drive recorded route
 		case 3:
-			record = false;
+			Record = false;
 			Sound.beep();
 			Sound.beep();
-			route.Play();
-			route.Play = true;
+			routeManager.Play();
+			routeManager.Play = true;
 			break;
 		// cancel current route
 		case 4:
-			route.Play = false;
+			routeManager.Play = false;
 			break;
-			
-			
 		}
-		//play prerecorded route
-		switch(remoteChan1) {
+		// play prerecorded route
+		switch (remoteChan1) {
 		case 1:
-			route.Route1();
+			routeManager.Route1();
 			break;
-		case 2:
-		
-			
-			
 		}
-		//play music
-		switch(remoteChan0) {
+		// play music
+		switch (remoteChan0) {
 		case 1:
-			music.start();
+			if (this.music.getState() == Thread.State.TERMINATED) {
+				this.music = new Music();
+			} else if (!this.music.isAlive()) {
+				this.music.start();
+			} else {
+				Delay.msDelay(10);
+			}
 			break;
 		}
-		
+
 	}
 
 	@Override

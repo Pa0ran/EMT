@@ -13,8 +13,15 @@ public class Images {
 	static final int JAATELO_2 = 1;
 	static final int JAATELO_3 = 2;
 	static final int JAATELO_4 = 3;
-	public static Image getImage(int i) {
-		switch (i) {
+	
+	/**
+	 * Returns icon of icecream
+	 * @param	int JAATELO_ID
+	 * @return	Image IcecreamIcon
+	 */
+	
+	public static Image getImage(int JAATELO_ID) {
+		switch (JAATELO_ID) {
 		case JAATELO_1:
 			return new Image(64, 64, new byte[] {(byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, 
 					(byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, 

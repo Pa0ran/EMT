@@ -2,6 +2,7 @@ package main;
 
 import java.io.File;
 import lejos.hardware.Sound;
+import lejos.utility.Delay;
 
 /**
  * @author	Satu Lintala, Niklas Malinen, Sam Hemming
@@ -19,5 +20,6 @@ public class Music extends Thread{
 	public void run() {
 		File biisi= new File("JtelautoTunnari2.wav");
 		Sound.playSample(biisi,100);
+		return;
 	}
 }

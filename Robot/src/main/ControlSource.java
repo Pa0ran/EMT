@@ -1,6 +1,7 @@
 package main;
 
 /**
+ * Interface to use with manualControl
  * @author	Esko Koskinen
  * @version	1.0
  * @since	7.5.2018

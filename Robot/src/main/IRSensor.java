@@ -6,6 +6,8 @@ import lejos.hardware.sensor.EV3IRSensor;
 import lejos.utility.Delay;
 
 /**
+ * Handles the IRSensors connection getting
+ * and provides the getRemotecmd()
  * @author	Niklas Malinen
  * @version	1.0
  * @since	7.5.2018
